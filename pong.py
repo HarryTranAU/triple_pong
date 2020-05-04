@@ -55,6 +55,17 @@ ball2.goto(0,0)
 ball2.dx = -0.2
 ball2.dy = -0.2
 
+# Ball 3
+ball3 = turtle.Turtle()
+ball3.speed(0)
+ball3.shape("square")
+ball3.color("orange")
+ball3.penup()
+ball3.goto(0,0)
+# Ball speed (change accordingly to computer speed)
+ball3.dx = 0.11
+ball3.dy = 0.11
+
 # Pen
 pen = turtle.Turtle()
 pen.speed(0)
@@ -103,6 +114,9 @@ while True:
     ball2.setx(ball2.xcor()+ball2.dx)
     ball2.sety(ball2.ycor()+ball2.dy)
 
+    ball3.setx(ball3.xcor()+ball3.dx)
+    ball3.sety(ball3.ycor()+ball3.dy)
+
     # Border checking
     if ball.ycor() > 290:
         ball.sety(290)
@@ -122,6 +136,16 @@ while True:
     if ball2.ycor() < -290:
         ball2.sety(-290)
         ball2.dy *= -1
+        os.system("aplay bounce.wav&")
+
+    if ball3.ycor() > 290:
+        ball3.sety(290)
+        ball3.dy *= -1
+        os.system("aplay bounce.wav&")
+
+    if ball3.ycor() < -290:
+        ball3.sety(-290)
+        ball3.dy *= -1
         os.system("aplay bounce.wav&")
 
     if ball.xcor() > 390:
@@ -152,6 +176,20 @@ while True:
         pen.clear()
         pen.write("Red: {}  Blue: {}".format(score_a, score_b), align="center", font=("Courier", 24, "normal"))
 
+    if ball3.xcor() > 390:
+        ball3.goto(0, random.randint(-290, 290))
+        ball3.dx *= -1
+        score_a += 2
+        pen.clear()
+        pen.write("Red: {}  Blue: {}".format(score_a, score_b), align="center", font=("Courier", 24, "normal"))
+
+    if ball3.xcor() < -390:
+        ball3.goto(0, random.randint(-290, 290))
+        ball3.dx *= -1
+        score_b += 2
+        pen.clear()
+        pen.write("Red: {}  Blue: {}".format(score_a, score_b), align="center", font=("Courier", 24, "normal"))
+
     # Paddle and ball collisions
     if (ball.xcor() > 340 and ball.xcor() < 350) and (ball.ycor() < paddle_b.ycor() + 40 and ball.ycor() > paddle_b.ycor() - 40):
         ball.setx(340)
@@ -171,4 +209,14 @@ while True:
     if (ball2.xcor() < -340 and ball2.xcor() > -350) and (ball2.ycor() < paddle_a.ycor() + 40 and ball2.ycor() > paddle_a.ycor() - 40):
         ball2.setx(-340)
         ball2.dx *= -1
+        os.system("aplay bounce.wav&")
+
+    if (ball3.xcor() > 340 and ball3.xcor() < 350) and (ball3.ycor() < paddle_b.ycor() + 40 and ball3.ycor() > paddle_b.ycor() - 40):
+        ball3.setx(340)
+        ball3.dx *= -1
+        os.system("aplay bounce.wav&")
+
+    if (ball3.xcor() < -340 and ball3.xcor() > -350) and (ball3.ycor() < paddle_a.ycor() + 40 and ball3.ycor() > paddle_a.ycor() - 40):
+        ball3.setx(-340)
+        ball3.dx *= -1
         os.system("aplay bounce.wav&")
