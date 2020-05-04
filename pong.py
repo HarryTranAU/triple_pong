@@ -3,6 +3,7 @@
 
 import turtle
 import os
+import random
 
 wn = turtle.Screen()
 wn.title("Triple Pong")
@@ -100,14 +101,14 @@ while True:
         os.system("aplay bounce.wav&")
 
     if ball.xcor() > 390:
-        ball.goto(0, 0)
+        ball.goto(0, random.randint(-290, 290))
         ball.dx *= -1
         score_a += 1
         pen.clear()
         pen.write("Red: {}  Blue: {}".format(score_a, score_b), align="center", font=("Courier", 24, "normal"))
 
     if ball.xcor() < -390:
-        ball.goto(0, 0)
+        ball.goto(0, random.randint(-290, 290))
         ball.dx *= -1
         score_b += 1
         pen.clear()
